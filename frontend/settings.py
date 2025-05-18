@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-a7u393emek=wsd+46%)#=s7+c$p&9l81r&^vah+@xk*w6zel(s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-product-catalog-frontend.onrender.com']
+ALLOWED_HOSTS = ['ecommerce-product-catalog-frontend.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
