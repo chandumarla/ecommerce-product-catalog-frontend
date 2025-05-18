@@ -21,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a7u393emek=wsd+46%)#=s7+c$p&9l81r&^vah+@xk*w6zel(s'
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -119,9 +120,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / 'staticfiles' 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -139,5 +139,6 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 #API token
 # This token is used to authenticate requests to the backend API.
-ADMIN_API_TOKEN = '69541cc7c26a7d6e9ae6da524a5f2a1a2516b771'
+ADMIN_API_TOKEN = os.environ.get('ADMIN_API_TOKEN')
+
 
