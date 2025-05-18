@@ -1,0 +1,133 @@
+<!-- templates/catalog/product_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f7f7f7;
+        }
+        h1 { 
+            text-align: center; 
+            color: #1976d2;
+            margin-bottom: 30px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 18px 15px 15px 15px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: transform 0.18s, box-shadow 0.18s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(25, 118, 210, 0.13);
+            border-color: #1976d2;
+        }
+        img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: box-shadow 0.18s;
+        }
+        .card:hover img {
+            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+        }
+        h3 {
+            margin: 10px 0 8px 0;
+            color: #1976d2;
+            font-size: 1.18em;
+            transition: color 0.18s;
+        }
+        .card:hover h3 {
+            color: #0d47a1;
+        }
+        .admin-actions a {
+            margin: 0 6px;
+            display: inline-block;
+            font-size: 14px;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.18s;
+        }
+        .admin-actions a:hover {
+            color: #d32f2f;
+        }
+        .add-btn {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .add-btn a {
+            background: #1976d2;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.08em;
+            transition: background 0.18s;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+        }
+        .add-btn a:hover {
+            background: #0d47a1;
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .card {
+                padding: 14px 8px 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Catalog</h1>
+
+    {% if user.is_staff %}
+    <div class="add-btn">
+        <a href="{% url 'add_product' %}">➕ Add New Product</a>
+    </div>
+    {% endif %}
+
+    <div class="grid">
+        {% for product in products %}
+        <div class="card">
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.images }}" alt="{{ product.name }}">
+            </a>
+            <a href="{% url 'product_detail' product.id %}">
+                <h3>{{ product.name }}</h3>
+            </a>
+            <p><strong>{{ product.category }}</strong></p>
+            <p><strong>₹{{ product.price }}</strong></p>
+            <p>{{ product.description|truncatechars:60 }}</p>
+
+            {% if user.is_staff %}
+            <div class="admin-actions">
+                <a href="{% url 'edit_product' product.id %}">✏️ Edit</a> |
+                <a href="{% url 'delete_product' product.id %}">❌ Delete</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

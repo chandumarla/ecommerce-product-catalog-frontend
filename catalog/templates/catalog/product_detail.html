@@ -1,0 +1,60 @@
+<!-- templates/catalog/product_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+        }
+        .product-container {
+            background: #fff;
+            max-width: 400px;
+            margin: 50px auto 0 auto;
+            padding: 30px 30px 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .product-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .product-title {
+            margin-bottom: 10px;
+            font-size: 2em;
+            color: #333;
+        }
+        .product-info {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h1 class="product-title">{{ product.name }}</h1>
+        <img src="{{ product.images }}" alt="{{ product.name }}" class="product-image">
+        <div class="product-info"><strong>Category:</strong> {{ product.category }}</div>
+        <div class="product-info"><strong>Price:</strong> ₹{{ product.price }}</div>
+        <div class="product-info"><strong>Description:</strong> {{ product.description }}</div>
+        <a href="{% url 'product_list' %}" class="back-link">← Back to Catalog</a>
+    </div>
+</body>
+</html>
