@@ -1,0 +1,64 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+<style>
+    body.login {
+        background: #f7f7f7;
+    }
+    #content {
+        margin-top: 60px;
+    }
+    .login-form {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 16px rgba(25, 118, 210, 0.10);
+        padding: 32px 28px 24px 28px;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .login-form h1 {
+        color: #1976d2;
+        text-align: center;
+        margin-bottom: 18px;
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    .login-form input[type="submit"] {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 0;
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background 0.18s;
+    }
+    .login-form input[type="submit"]:hover {
+        background: #0d47a1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-form">
+    <h1>Shopify Admin</h1>
+    {{ form.errors }}
+    <form action="" method="post" id="login-form">{% csrf_token %}
+        <div>
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+        <div style="margin-top: 12px;">
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+        </div>
+        <input type="submit" value="Log in">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+</div>
+{% endblock %}
