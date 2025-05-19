@@ -1,4 +1,4 @@
-import requests # type: ignore
+import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
@@ -33,7 +33,7 @@ def add_product_view(request):
         files = {'images': request.FILES['images']} if 'images' in request.FILES else {}
         headers = get_auth_headers()
         resp = requests.post(API_BASE, data=data, files=files, headers=headers)
-        print(resp.status_code, resp.text)  # Debug line
+        
         return redirect('product_list')
     return render(request, 'catalog/add_edit_product.html', {'title': 'Add Product'})
 
